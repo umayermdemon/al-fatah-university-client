@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Layout, Menu } from "antd";
 import sidebarGenerator from "../../utils/sidebarGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { facultyPaths } from "../../routes/faculty.routes";
 import { studentPaths } from "../../routes/student.routes";
+import { useAppSelector } from "../../redux/hooks";
+import { useAuthUser } from "../../redux/features/auth/authSlice";
 const { Sider } = Layout;
 const Sidebar = () => {
   const userRole = {
-    ADMIN: "admin",
-    FACULTY: "faculty",
-    STUDENT: "student",
+    ADMIN: "Admin",
+    FACULTY: "Faculty",
+    STUDENT: "Student",
   };
-  const role = "faculty";
+  const { role }: any = useAppSelector(useAuthUser);
 
   let sidebarItems;
   switch (role) {
