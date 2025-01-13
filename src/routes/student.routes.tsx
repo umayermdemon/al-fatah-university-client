@@ -1,4 +1,4 @@
-import StudentDashboard from "../pages/UserManagement/Student/StudentDashboard";
+import StudentDashboard from "../pages/Student/StudentDashboard";
 
 export const studentPaths = [
   {

@@ -1,13 +1,24 @@
-import AdminDashboard from "../pages/UserManagement/Admin/AdminDashboard";
-import CreateAdmin from "../pages/UserManagement/Admin/CreateAdmin";
-import CreateFaculty from "../pages/UserManagement/Admin/CreateFaculty";
-import CreateStudent from "../pages/UserManagement/Admin/CreateStudent";
+import AcademicSemester from "../pages/Admin/AcademicManagement/AcademicSemester";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import CreateAdmin from "../pages/Admin/UserManagement/CreateAdmin";
+import CreateFaculty from "../pages/Admin/UserManagement/CreateFaculty";
+import CreateStudent from "../pages/Admin/UserManagement/CreateStudent";
 
 export const adminPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
     element: <AdminDashboard />,
+  },
+  {
+    name: "Academic Management",
+    children: [
+      {
+        name: "Academic Semester",
+        path: "academic-semester",
+        element: <AcademicSemester />,
+      },
+    ],
   },
   {
     name: "User Management",
