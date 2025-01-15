@@ -12,10 +12,10 @@ const MainLayout = () => {
     dispatch(logout());
   };
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100%" }}>
       <Sidebar />
       <Layout>
-        <Header>
+        <Header style={{ position: "sticky", top: "0", zIndex: "999" }}>
           <Button onClick={handleLogout}>Logout</Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
