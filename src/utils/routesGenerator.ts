@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TUserPath } from "../types/sidebar.types";
+import { TUserPath } from "../types/sidebar.type";
 
 type TRoute = {
   path: string;
