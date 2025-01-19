@@ -7,7 +7,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { semesterOptions } from "../../../constants/semester";
 import { monthOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { academicManagementSchema } from "../../../schemas/academicManagement.schema";
+import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/Admin/AcademicManagementApi";
 import { toast } from "sonner";
 import { TAcademicSemesterData, TResponse } from "../../../types";
@@ -48,7 +48,7 @@ const CreateAcademicSemester = () => {
       <Col span={6}>
         <AFForm
           onSubmit={onSubmit}
-          resolver={zodResolver(academicManagementSchema)}>
+          resolver={zodResolver(academicSemesterSchema)}>
           <AFSelect name="name" label="Name" options={semesterOptions} />
           <AFSelect name="year" label="Year" options={yearOptions} />
           <AFSelect
