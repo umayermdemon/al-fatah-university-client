@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Layout, Menu } from "antd";
 import sidebarGenerator from "../../utils/sidebarGenerator";
 import { adminPaths } from "../../routes/admin.routes";

@@ -1,12 +1,12 @@
 import { Table, TableColumnsType } from "antd";
-import { TAcademicDepartment } from "../../../types/academicDepartment";
+import { TAcademicDepartment } from "../../../types/academicDepartment.type";
 import { useGetAllAcademicDepartmentQuery } from "../../../redux/features/Admin/AcademicManagementApi";
 
 const AcademicDepartment = () => {
   const { data: academicDepartmentData } =
     useGetAllAcademicDepartmentQuery(undefined);
   const tableData = academicDepartmentData?.data?.map(
-    ({ _id, name, academicFaculty }: TAcademicDepartment) => {
+    ({ _id, name, academicFaculty }: any) => {
       const facultyName = academicFaculty?.name;
       return {
         key: _id,

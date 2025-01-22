@@ -30,8 +30,8 @@ const AFForm = ({
   }
   const methods = useForm(formConfig);
   const submit = (data: any) => {
-    methods.reset();
     onSubmit(data);
+    // methods.reset();
   };
   return (
     <FormProvider {...methods}>

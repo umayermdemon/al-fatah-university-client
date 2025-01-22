@@ -1,4 +1,4 @@
-export type TAcademicSemesterData = {
+export type TAcademicSemester = {
   _id: string;
   name: string;
   code: string;

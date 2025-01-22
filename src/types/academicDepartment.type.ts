@@ -1,7 +1,7 @@
 export type TAcademicDepartment = {
   _id: string;
   name: string;
-  academicFaculty: string | any;
+  academicFaculty: string;
   createdAt?: string;
   updatedAt?: string;
   message: string;

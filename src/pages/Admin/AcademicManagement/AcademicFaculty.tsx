@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { Table, TableColumnsType, TableProps } from "antd";
-import { useGetAllFacultiesQuery } from "../../../redux/features/Admin/AcademicManagementApi";
+import { useGetAllAcademicFacultiesQuery } from "../../../redux/features/Admin/AcademicManagementApi";
 
 interface DataType {
   key: React.Key;
   name: string;
 }
 const AcademicFaculty = () => {
-  const { data: AcademicFacultyData } = useGetAllFacultiesQuery(undefined);
+  const { data: AcademicFacultyData, isFetching } =
+    useGetAllAcademicFacultiesQuery(undefined);
   const tableData = AcademicFacultyData?.data?.map(({ name }) => ({
     name,
     key: name,
@@ -36,6 +37,7 @@ const AcademicFaculty = () => {
     <Table<DataType>
       rowSelection={{ ...rowSelection }}
       columns={columns}
+      loading={isFetching}
       dataSource={tableData}
     />
   );

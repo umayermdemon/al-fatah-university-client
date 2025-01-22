@@ -1,0 +1,33 @@
+const facultyDesignations = [
+  "Professor",
+  "Associate Professor",
+  "Assistant Professor",
+  "Lecturer",
+  "Adjunct Professor",
+  "Senior Lecturer",
+  "Research Fellow",
+  "Postdoctoral Researcher",
+  "Head of Department (HOD)",
+  "Dean",
+  "Assistant Dean",
+  "Chancellor",
+  "Vice Chancellor",
+  "Provost",
+  "Academic Advisor",
+  "Visiting Professor",
+  "Emeritus Professor",
+  "Teaching Assistant",
+  "Graduate Teaching Assistant",
+  "Lab Instructor",
+  "Course Coordinator",
+  "Director of Research",
+  "Program Coordinator",
+  "Faculty Coordinator",
+  "Instructor",
+  "Tutor",
+];
+
+export const facultyDesignationOptions = facultyDesignations.map((item) => ({
+  value: item,
+  label: item,
+}));

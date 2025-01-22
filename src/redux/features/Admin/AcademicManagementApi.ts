@@ -1,8 +1,4 @@
-import {
-  TAcademicSemesterData,
-  TQueryParam,
-  TResponseRedux,
-} from "../../../types";
+import { TAcademicSemester, TQueryParam, TResponseRedux } from "../../../types";
 import { TAcademicFaculty } from "../../../types/academicFaculty.type";
 import { baseApi } from "../../api/baseApi";
 
@@ -22,11 +18,10 @@ const AcademicManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      transformResponse: (
-        response: TResponseRedux<TAcademicSemesterData[]>
-      ) => {
+      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
         return {
-          data: response?.data,
+          data: response.data,
+          meta: response.meta,
         };
       },
     }),
@@ -37,7 +32,7 @@ const AcademicManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    getAllFaculties: builder.query({
+    getAllAcademicFaculties: builder.query({
       query: () => {
         // const params = new URLSearchParams();
         // if (args) {
@@ -57,7 +52,7 @@ const AcademicManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
-    getFacultyByName: builder.query({
+    getAcademicFacultyByName: builder.query({
       query: (name: string) => {
         return {
           url: `/academic-faculties/byName/${name}`,
@@ -83,6 +78,12 @@ const AcademicManagementApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getSingleAcademicDepartment: builder.query({
+      query: (id: string) => ({
+        url: `/academic-departments/${id}`,
+        method: "GET",
+      }),
+    }),
     addAcademicDepartment: builder.mutation({
       query: (data) => ({
         url: "/academic-departments/create-academic-department",
@@ -96,9 +97,10 @@ const AcademicManagementApi = baseApi.injectEndpoints({
 export const {
   useGetAllAcademicSemesterQuery,
   useAddAcademicSemesterMutation,
-  useGetAllFacultiesQuery,
-  useGetFacultyByNameQuery,
+  useGetAllAcademicFacultiesQuery,
+  useGetAcademicFacultyByNameQuery,
   useAddAcademicFacultyMutation,
   useGetAllAcademicDepartmentQuery,
   useAddAcademicDepartmentMutation,
+  useGetSingleAcademicDepartmentQuery,
 } = AcademicManagementApi;

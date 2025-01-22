@@ -9,7 +9,7 @@ import {
 } from "../../../constants/academicDepartment";
 import { useAddAcademicDepartmentMutation } from "../../../redux/features/Admin/AcademicManagementApi";
 import { TResponse } from "../../../types";
-import { TAcademicDepartment } from "../../../types/academicDepartment";
+import { TAcademicDepartment } from "../../../types/academicDepartment.type";
 import { toast } from "sonner";
 
 const CreateAcademicDepartment = () => {
@@ -21,7 +21,6 @@ const CreateAcademicDepartment = () => {
       const departmentData = {
         name: data.name,
       };
-      console.log(departmentData);
       const res = (await addAcademicDepartment(
         departmentData
       )) as TResponse<TAcademicDepartment>;
@@ -33,7 +32,6 @@ const CreateAcademicDepartment = () => {
     } catch (err) {
       console.log(err);
     }
-    console.log(data);
   };
 
   return (

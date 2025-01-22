@@ -1,22 +1,24 @@
+import { useParams } from "react-router-dom";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import AFForm from "../../../Form/AFForm";
 import AFInput from "../../../Form/AFInput";
 import AFSelect from "../../../Form/AFSelect";
-import { genderOptions } from "../../../constants/global";
 import AFDatePicker from "../../../Form/AFDatePicker";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
+import { genderOptions } from "../../../constants/global";
 import {
   useGetAllAcademicDepartmentQuery,
   useGetAllAcademicSemesterQuery,
 } from "../../../redux/features/Admin/AcademicManagementApi";
-import { useAddStudentMutation } from "../../../redux/features/Admin/UserManagementApi";
-import { toast } from "sonner";
-import { TRes } from "../../../types";
+import { useGetSingleStudentQuery } from "../../../redux/features/Admin/UserManagementApi";
 
-const CreateStudent = () => {
-  const { data: sData, isLoading: sIsLoading } = useGetAllAcademicSemesterQuery(
-    [{ name: "sort", value: "year" }]
-  );
+const StudentUpdate = () => {
+  const { studentId } = useParams();
+  console.log(studentId);
+  const { data: studentData } = useGetSingleStudentQuery(studentId as string);
+  console.log(studentData);
+  const { data: sData, isLoading: sIsLoading } =
+    useGetAllAcademicSemesterQuery(undefined);
   const semesterOptions = sData?.data?.map((item) => ({
     value: item._id,
     label: `${item.name}-${item.year}`,
@@ -29,32 +31,50 @@ const CreateStudent = () => {
       label: item.name,
     })
   );
-  const [addStudent] = useAddStudentMutation();
-
+  const studentDefaultValues = {
+    student: {
+      name: {
+        firstName: studentData?.data?.name?.firstName,
+        middleName: studentData?.data?.name?.middleName,
+        lastName: studentData?.data?.name?.lastName,
+      },
+      gender: studentData?.data?.gender,
+      email: studentData?.data?.email,
+      contactNo: studentData?.data?.contactNo,
+      emergencyContactNo: "1987654328",
+      presentAddress: "123 Main Street, Springfield",
+      permanentAddress: "456 Elm Street, Springfield",
+      guardian: {
+        fatherName: "Robert Doe",
+        fatherOccupation: "Engineer",
+        fatherContactNo: "1234567890",
+        motherName: "Alice Doe",
+        motherOccupation: "Teacher",
+        motherContactNo: "1987654321",
+      },
+      localGuardian: {
+        name: "Michael Smith",
+        occupation: "Doctor",
+        contactNo: "1122334455",
+        address: "789 Pine Street, Springfield",
+      },
+    },
+  };
   const onsubmit: SubmitHandler<FieldValues> = async (data) => {
     // console.log(data);
-    try {
-      const studentData = {
-        password: "student123",
-        student: data,
-      };
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(studentData));
-      formData.append("file", data.profileImg);
-      const res: TRes = await addStudent(formData);
-      if (res.error) {
-        toast.error(res?.error?.data?.errorSources[0]?.message);
-      } else {
-        toast.success(res.data.message);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const studentData = {
+      password: "student123",
+      student: data,
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.profileImg);
+    console.log(formData);
   };
   return (
     <Row>
       <Col span={24}>
-        <AFForm onSubmit={onsubmit}>
+        <AFForm onSubmit={onsubmit} defaultValues={studentDefaultValues}>
           <Row gutter={8}>
             <Divider>Personal Info</Divider>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
@@ -215,4 +235,4 @@ const CreateStudent = () => {
   );
 };
 
-export default CreateStudent;
+export default StudentUpdate;
