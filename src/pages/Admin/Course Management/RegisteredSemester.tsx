@@ -6,6 +6,11 @@ import {
 } from "../../../redux/features/Admin/CourseManagementApi";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  errorStyle,
+  loadingStyle,
+  successStyle,
+} from "../../../utils/toastColor";
 type TTableData = Pick<TSemester, "_id" | "endDate" | "startDate" | "status">;
 
 const items = [
@@ -39,6 +44,7 @@ const RegisteredSemester = () => {
   );
 
   const handleStatusUpdate = async (data: any) => {
+    const toastId = toast.loading("Updating....", { style: loadingStyle });
     const updateData = {
       id: semesterId,
       data: {
@@ -47,11 +53,13 @@ const RegisteredSemester = () => {
     };
     try {
       const res: TRes = await updateStatus(updateData);
-      console.log(res);
       if (res.error) {
-        toast.error(res?.error?.data?.message);
+        toast.error(res?.error?.data?.message, {
+          style: errorStyle,
+          id: toastId,
+        });
       } else {
-        toast.success(res.data.message);
+        toast.success(res.data.message, { style: successStyle, id: toastId });
       }
     } catch (err) {
       console.log(err);

@@ -7,6 +7,7 @@ import { facultyPaths } from "../../routes/faculty.routes";
 import { studentPaths } from "../../routes/student.routes";
 import { useAppSelector } from "../../redux/hooks";
 import { selectAuthUser } from "../../redux/features/auth/authSlice";
+import { ItemType, MenuItemType } from "antd/es/menu/interface";
 const { Sider } = Layout;
 const Sidebar = () => {
   const userRole = {
@@ -58,7 +59,7 @@ const Sidebar = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
-        items={sidebarItems}
+        items={sidebarItems as ItemType<MenuItemType>[]}
       />
     </Sider>
   );

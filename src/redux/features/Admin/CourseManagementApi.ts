@@ -1,4 +1,5 @@
 import { TResponseRedux, TSemester } from "../../../types";
+import { TCourses } from "../../../types/course.type";
 import { baseApi } from "../../api/baseApi";
 
 const CourseManagementApi = baseApi.injectEndpoints({
@@ -37,6 +38,25 @@ const CourseManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["semester"],
     }),
+    getAllCourses: builder.query({
+      query: () => ({
+        url: "/courses",
+        method: "GET",
+      }),
+      transformResponse: (response: TResponseRedux<TCourses[]>) => ({
+        data: response?.data,
+        // meta: response?.meta,
+      }),
+      providesTags: ["course"],
+    }),
+    addCourse: builder.mutation({
+      query: (data) => ({
+        url: "/courses/create-course",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["course"],
+    }),
   }),
 });
 
@@ -45,4 +65,6 @@ export const {
   useGetAllRegisteredSemesterQuery,
   useUpdateSemesterRegistrationMutation,
   useDeleteSemesterRegistrationMutation,
+  useGetAllCoursesQuery,
+  useAddCourseMutation,
 } = CourseManagementApi;

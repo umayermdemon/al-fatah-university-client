@@ -11,7 +11,7 @@ const sidebarGenerator = (items: TUserPath[], role: string) => {
     }
     if (item.children) {
       acc.push({
-        key: item.name,
+        key: item.name as string,
         label: item.name,
         children: item.children.map((item) => {
           if (item.name) {
