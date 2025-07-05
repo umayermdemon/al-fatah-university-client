@@ -32,7 +32,7 @@ const CreateStudent = () => {
   const [addStudent] = useAddStudentMutation();
 
   const onsubmit: SubmitHandler<FieldValues> = async (data) => {
-    // console.log(data);
+    console.log(data);
     try {
       const studentData = {
         password: "student123",
